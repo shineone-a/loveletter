@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>hawwoo lisqillaa 😆🤍</title>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sacramento&family=Poppins:wght@400;600&display=swap');
+
+  :root{
+    --pink-1:#ffe6f2;
+    --pink-2:#ffd6e8;
+    --pink-3:#ffb6c1;
+    --pink-4:#ff80aa;
+    --pink-5:#ff4d88;
+  }
+
+  /* Layout dasar */
+  html,body{
+    height:100%;
+  }
+  body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:
+      radial-gradient(1200px 600px at 20% -10%, #fff0 40%, #ffcce0 41% 43%, #fff0 44%),
+      linear-gradient(135deg,var(--pink-2),var(--pink-1),var(--pink-2));
+    color:#333;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:36px 18px 64px;
+    overflow-y:auto; /* biar bisa scroll */
+  }
+
+  /* Heading lettering */
+  h1{
+    font-family:'Sacramento',cursive;
+    font-size: clamp(40px, 6vw, 72px);
+    color: var(--pink-5);
+    text-shadow: 0 6px 18px rgba(255,105,135,.25);
+    margin:0 0 14px;
+    letter-spacing:.5px;
+    position:relative;
+  }
+  h1::after{
+    content:" 💖";
+    font-family:inherit;
+  }
+
+  /* Tombol (pakai checkbox hack) */
+  .toggle{ display:none; }
+  .btn{
+    display:inline-block;
+    background: var(--pink-4);
+    color:#fff;
+    padding:12px 28px;
+    border-radius:999px;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(255,105,135,.35);
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+    user-select:none;
+  }
+  .btn:hover{ transform:translateY(-1px); background:var(--pink-5); box-shadow:0 12px 26px rgba(255,77,136,.45); }
+
+  /* Panggung */
+  .stage{
+    width: min(560px, 92vw);
+    margin-top:24px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  /* Amplop */
+  .envelope{
+    width:min(420px, 88vw);
+    height:200px;
+    position:relative;
+    perspective:1000px;
+    opacity:0;
+    transform: translateY(10px) scale(.97);
+    transition: opacity .5s ease, transform .5s ease;
+    filter: drop-shadow(0 10px 18px rgba(0,0,0,.08));
+  }
+  .env-back, .env-front{
+    position:absolute; inset:0; border-radius:16px;
+  }
+  .env-back{
+    background: linear-gradient(180deg, #ffdbe6, var(--pink-3));
+  }
+  /* sisi kiri & kanan (sayap) */
+  .env-left, .env-right{
+    content:"";
+    position:absolute; top:30px; bottom:0; width:50%;
+    background: linear-gradient(180deg,#ffc1d1,#ff96b6);
+  }
+  .env-left{ left:0; clip-path: polygon(0 0, 100% 45%, 100% 100%, 0 100%); border-bottom-left-radius:16px; }
+  .env-right{ right:0; clip-path: polygon(0 45%, 100% 0, 100% 100%, 0 100%); border-bottom-right-radius:16px; }
+
+  /* flap (tutup) */
+  .flap{
+    position:absolute; left:0; right:0; top:0; height:120px;
+    transform-origin: top;
+    background: linear-gradient(180deg, var(--pink-4), #ff96b6);
+    clip-path: polygon(0 0, 100% 0, 50% 85%);
+    border-top-left-radius:16px; border-top-right-radius:16px;
+    transition: transform 1s ease;
+    z-index:2;
+  }
+
+  /* segel hati */
+  .seal{
+    position:absolute; left:50%; bottom:20px;
+    transform:translateX(-50%);
+    width:52px; height:52px; border-radius:50%;
+    background: #ff739f;
+    display:grid; place-items:center;
+    box-shadow:0 6px 14px rgba(255,115,159,.35);
+    z-index:3;
+  }
+  .seal::before{
+    content:"❤";
+    color:#fff; font-size:22px;
+    transform:translateY(-1px);
+  }
+
+  /* Surat (terpisah) */
+  .letter{
+    width: min(560px, 92vw);
+    max-height: 65vh;      /* batas tinggi, sisanya scroll */
+    overflow:auto;         /* scroll kalau panjang */
+    background:#fff;
+    border-radius:18px;
+    margin-top:22px;
+    padding:22px 20px;
+    line-height:1.75;
+    font-size:1rem;
+    box-shadow:0 12px 28px rgba(0,0,0,.12);
+    opacity:0;
+    transform: translateY(4px);
+    transition: opacity .8s ease .2s, transform .8s ease .2s;
+    white-space:pre-line;  /* hormati line break */
+  }
+
+  /* State saat tombol aktif */
+  .toggle:checked ~ .stage .envelope{
+    opacity:1; transform: translateY(0) scale(1);
+  }
+  .toggle:checked ~ .stage .flap{
+    transform: rotateX(-180deg);
+  }
+  .toggle:checked ~ .stage .letter{
+    opacity:1; transform: translateY(0);
+  }
+
+  /* Dekor love kecil */
+  .float-hearts{
+    position:fixed; inset:0; pointer-events:none; z-index:-1;
+  }
+  .float-hearts span{
+    position:absolute; font-size:18px; opacity:.22; animation: rise 9s linear infinite;
+  }
+  .float-hearts span:nth-child(odd){ animation-duration:11s; }
+  @keyframes rise{
+    from{ transform: translateY(10vh); }
+    to{ transform: translateY(-120vh); }
+  }
+</style>
+</head>
+<body>
+
+  <h1>hawwoo lisqillaa 😆🤍</h1>
+
+  <!-- Checkbox kontrol -->
+  <input type="checkbox" id="open" class="toggle" />
+  <label for="open" class="btn">tekan aku</label>
+
+  <div class="stage">
+    <!-- Amplop -->
+    <div class="envelope">
+      <div class="env-back"></div>
+      <div class="env-left"></div>
+      <div class="env-right"></div>
+      <div class="flap"></div>
+      <div class="seal"></div>
+    </div>
+
+    <!-- Kertas (TERPISAH dari amplop) -->
+    <div class="letter">
+haloo sayangnyaa atiaa 🐧👋🏻🤍, camatt malamm peyukk peyukk っ˶ ˘ ᵕ˘|ˆᵕ ˆ˶ς 🌃, TIEE PASTII LAGI BUKA WEB NYA YAH XIXIXIXI, i just wanna say... aku minta maaf ya hari ini sudah membuat kamu kesal dan mungkin ada rasa lelah juga mengahadapi aku. aku minta maaf banyak banyak yaa, aku bener bener engga sadar kalau baju aku jadi terlihat ketat kalaupun aku tau pasti langsung aku benerin karena aku juga se ngga suka itu sama baju yang ketat :(, eumm ini penjelasan dari akuu, di terima atau ndaa nyaa ndaa papaaa, aku berusaha menjelaskan saja ♡
+
+maaf ya aku membuat jumat kamu menjadi jumat kesal, timaaaciii dan maaf untuk harii ini yaaa mamass sayaangg, camaatt boboo oteeyiee 🤍🌃, lovee u so much lisqillaaa, akuu sayaangg tamuuuuu, CEYIPP WEYY 💗💗‼️‼️
+
+
+jangan tinggalin aku ya... mamasss • ᴖ • ｡
+    </div>
+  </div>
+
+  <!-- Dekor love melayang lembut -->
+  <div class="float-hearts" aria-hidden="true">
+    <span style="left:6%; animation-delay:-1s">💖</span>
+    <span style="left:22%; animation-delay:-5s">💗</span>
+    <span style="left:38%; animation-delay:-8s">💞</span>
+    <span style="left:57%; animation-delay:-3s">💖</span>
+    <span style="left:74%; animation-delay:-7s">💗</span>
+    <span style="left:88%; animation-delay:-2s">💞</span>
+  </div>
+
+</body>
+</html>
